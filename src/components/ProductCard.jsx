@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  const [remainingTime, setRemainingTime] = useState(product.remainingTime);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRemainingTime((prevTime) => prevTime - 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // Generar tiempo aleatorio para habilitar o deshabilitar navegación
+  const randomTime = Math.floor(Math.random() * 180) + 60; // Tiempo entre 60 y 240 segundos
 
   return (
-    <div className="product-card">
-      <img src={product.image} alt={product.title} />
+    <div>
       <h3>{product.title}</h3>
-      <p>Remaining Time: {remainingTime}s</p>
-      {remainingTime > 0 ? (
-        <Link to={`/detalle/${product.id}`}>Ver detalle</Link>
-      ) : (
-        <p>Time expired</p>
-      )}
+      <img src={product.image} alt={product.title} />
+      <p>Price: {product.price}</p>
+      <p>Description: {product.description}</p>
+      <p>Category: {product.category}</p>
+      <p>Rating: {product.rating.rate} (Count: {product.rating.count})</p>
+      <p>Remaining Time: {randomTime} seconds</p>
+      <Link to={`/detalle/${product.id}`}>Go to Product Detail</Link>
     </div>
   );
 };

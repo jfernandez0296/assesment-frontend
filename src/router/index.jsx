@@ -1,23 +1,28 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { RickAndMorty, Pokemon, RAMDetails } from "../pages";
+// src/router/router.js
+import React, { useState, useEffect } from 'react';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>home</div>,
-    errorElement: <div> Hubo un error!!</div>,
-  },
-  {
-    path: "/pokemon",
-    element: <Pokemon />,
-  },
-  {
-    path: "/rickandmorty",
-    element: <RickAndMorty />,
-  },
+const createBrowserRouter = (routes) => {
+  const RouterProvider = ({ children }) => {
+    const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-]);
+    useEffect(() => {
+      const handleRouteChange = () => {
+        setCurrentPath(window.location.pathname);
+      };
 
-const CustomRouter = () => <RouterProvider router={router}></RouterProvider>;
+      window.addEventListener('popstate', handleRouteChange);
 
-export { CustomRouter };
+      return () => {
+        window.removeEventListener('popstate', handleRouteChange);
+      };
+    }, []);
+
+    const route = routes.find((route) => route.path === currentPath);
+
+    return route ? <route.component /> : null;
+  };
+
+  return RouterProvider;
+};
+
+export default createBrowserRouter;
