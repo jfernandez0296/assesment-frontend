@@ -1,28 +1,19 @@
-// src/router/router.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
+import ProductDetail from './components/ProductDetail';
+import About from './components/About';
 
-const createBrowserRouter = (routes) => {
-  const RouterProvider = ({ children }) => {
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
-
-    useEffect(() => {
-      const handleRouteChange = () => {
-        setCurrentPath(window.location.pathname);
-      };
-
-      window.addEventListener('popstate', handleRouteChange);
-
-      return () => {
-        window.removeEventListener('popstate', handleRouteChange);
-      };
-    }, []);
-
-    const route = routes.find((route) => route.path === currentPath);
-
-    return route ? <route.component /> : null;
-  };
-
-  return RouterProvider;
+const Router = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/detail/:id" component={ProductDetail} />
+        <Route path="/about" component={About} />
+      </Switch>
+    </BrowserRouter>
+  );
 };
 
-export default createBrowserRouter;
+export default Router;
