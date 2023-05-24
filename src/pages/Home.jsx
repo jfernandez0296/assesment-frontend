@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProductCard from './ProductCard';
-import moment from 'moment';
+import ProductCard from '../components/ProductCard';
+
 
 const Home = () => {
   const [products, setProducts] = useState([]);
