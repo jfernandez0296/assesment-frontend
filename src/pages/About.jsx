@@ -6,17 +6,18 @@ const About = () => {
       <h2>About</h2>
       <p>Personal information:</p>
       <ul>
-        <li>Name: John Doe</li>
+        <li>Nombre: Jaime Fernández Chávez</li>
         <li>Description: Full-stack web developer</li>
-        <li>Email: johndoe@example.com</li>
+        <li>Correo: jfernandezc@uni.pe</li>
       </ul>
-      <p>Three things I've learned in this program:</p>
+      <p>Lista de 3 cosas que hayas aprendido en este programa:</p>
       <ul>
         <li>React</li>
         <li>Node.js</li>
         <li>API integration</li>
       </ul>
-      <a href="https://github.com/johndoe">GitHub</a>
+      <p>Link a Github:</p>
+      <a href="https://github.com/jfernandez0296">GitHub</a>
     </div>
   );
 };

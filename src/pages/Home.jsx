@@ -7,23 +7,28 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://api.storerestapi.com/products')
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('url-de-la-api');
+      const data = await response.json();
+      setProducts(data.data); // Actualiza la variable products con el arreglo de productos
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
   return (
     <div>
-      <h2>Product List</h2>
-      <div className="product-list">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {products.map((product) => (
+        <div key={product._id}>
+          <h3>{product.title}</h3>
+          <p>Price: {product.price}</p>
+          <p>Category: {product.category.name}</p>
+        </div>
+      ))}
     </div>
   );
 };

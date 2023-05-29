@@ -1,19 +1,29 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import ProductDetail from '../pages/ProductDetail';
-import About from '../pages/About';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { About,Home, ProductDetail } from "../pages"
 
-const AppRouter = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<ProductDetail />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <button>home</button>,
+    errorElement: <div> Hubo un error!!</div>,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
 
-export default AppRouter;
+
+  {
+    path: "/productdetail",
+    element: <ProductDetail/>,
+  },
+
+]);
+
+const CustomRouter = () => <RouterProvider router={router}></RouterProvider>;
+
+export { CustomRouter };
